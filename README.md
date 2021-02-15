@@ -20,6 +20,10 @@ Map Editor is a challenge by [Academia de Código](https://www.academiadecodigo.
 - Create keyboard handlers [DONE]
 - Add streams to write and read text files
 
+## Extra features
+- Mouse handler
+- Make painter fill the path while holding space and moving
+- Tools bar with differente colors
 
 License
 ----

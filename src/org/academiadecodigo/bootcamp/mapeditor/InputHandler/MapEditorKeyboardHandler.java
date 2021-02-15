@@ -5,6 +5,8 @@ import org.academiadecodigo.bootcamp.mapeditor.Painter.Painter;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
+import java.io.IOException;
+
 public class MapEditorKeyboardHandler implements KeyboardHandler {
 
     private MapEditor mapEditor;
@@ -39,6 +41,12 @@ public class MapEditorKeyboardHandler implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_RIGHT:
                 movement.moveRight();
+                break;
+            case KeyboardEvent.KEY_S:
+                mapEditor.getFileSaver().save("saved-drawing.txt");
+                break;
+            case KeyboardEvent.KEY_L:
+                // fileLoader.load(file.txt);
                 break;
         }
     }
