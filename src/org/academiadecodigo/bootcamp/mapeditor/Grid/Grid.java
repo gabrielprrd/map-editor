@@ -22,20 +22,4 @@ public interface Grid {
      */
     public int getRows();
 
-    /**
-     * Create a random grid position
-     *
-     * @return the new grid position
-     */
-    public GridPosition makeGridPosition();
-
-    /**
-     * Creates a a grid position in a specific column and row
-     *
-     * @param col   the position column
-     * @param row   the position row
-     * @return the new grid position
-     */
-    public GridPosition makeGridPosition(int col, int row);
-
 }

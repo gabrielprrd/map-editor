@@ -10,7 +10,8 @@ Map Editor is a challenge by [Academia de Código](https://www.academiadecodigo.
 - Add .gitinore [DONE]
 - Add README.md [DONE]
 - Install Simple Graphics library [DONE]
-- Create grid
+- Create grid [DONE]
+- Create state so cell can be filled with color
 - Create keyboard handlers
 - Add streams to write and read text files
 
