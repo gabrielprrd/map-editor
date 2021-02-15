@@ -1,6 +1,8 @@
 package org.academiadecodigo.bootcamp.mapeditor.Grid;
 
 import org.academiadecodigo.bootcamp.mapeditor.Grid.Cell.Cell;
+import org.academiadecodigo.bootcamp.mapeditor.MapEditor;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 import java.util.ArrayList;
@@ -13,10 +15,12 @@ public class MapEditorGrid implements Grid {
     private int rows;
     private Rectangle grid;
     private ArrayList<Cell> cells;
+    private MapEditor mapEditor;
 
-    public MapEditorGrid(int cols, int rows) {
+    public MapEditorGrid(MapEditor mapEditor, int cols, int rows) {
         this.cols = cols;
         this.rows = rows;
+        this.mapEditor = mapEditor;
 
         grid = new Rectangle(PADDING, PADDING, getWidth(), getHeight());
     }
@@ -68,4 +72,28 @@ public class MapEditorGrid implements Grid {
             cell.getShape().draw();
         }
     }
+
+    public void paintCell() {
+        for (Cell cell : cells) {
+
+            if (cell.getCol()-getPadding() == mapEditor.getPainter().getCol() &&
+                cell.getRow()-getPadding() == mapEditor.getPainter().getRow()) {
+
+                cell.paint(grid.getColor());
+                cell.fill(true);
+            }
+        }
+    }
+
+   public void eraseColor() {
+        for (Cell cell : cells) {
+
+            if (cell.getCol()-getPadding() == mapEditor.getPainter().getCol() &&
+                cell.getRow()-getPadding() == mapEditor.getPainter().getRow()) {
+
+                cell.getShape().draw();
+                cell.fill(false);
+            }
+        }
+   }
 }
