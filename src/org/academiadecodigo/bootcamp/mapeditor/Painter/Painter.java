@@ -1,5 +1,6 @@
 package org.academiadecodigo.bootcamp.mapeditor.Painter;
 
+import org.academiadecodigo.bootcamp.mapeditor.Grid.Cell.Cell;
 import org.academiadecodigo.bootcamp.mapeditor.Grid.MapEditorGrid;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -56,5 +57,29 @@ public class Painter {
 
     public void updateColToRight() {
         col += cellSize;
+    }
+
+    public void paint() {
+        for (Cell cell : grid.getCells()) {
+
+            if (cell.getCol() - grid.getPadding() == col &&
+                    cell.getRow() - grid.getPadding() == row) {
+
+                cell.paint(color);
+                cell.fill(true);
+            }
+        }
+    }
+
+    public void eraseColor() {
+        for (Cell cell : grid.getCells()) {
+
+            if (cell.getCol() - grid.getPadding() == col &&
+                    cell.getRow() - grid.getPadding() == row) {
+
+                cell.getShape().draw();
+                cell.fill(false);
+            }
+        }
     }
 }

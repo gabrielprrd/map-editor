@@ -2,7 +2,6 @@ package org.academiadecodigo.bootcamp.mapeditor.Grid;
 
 import org.academiadecodigo.bootcamp.mapeditor.Grid.Cell.Cell;
 import org.academiadecodigo.bootcamp.mapeditor.MapEditor;
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 import java.util.ArrayList;
@@ -64,36 +63,13 @@ public class MapEditorGrid implements Grid {
             for (int j=0; j<rows; j++) {
 
                 Cell cell = new Cell(PADDING+(CELL_SIZE*i), PADDING+(CELL_SIZE*j), CELL_SIZE, CELL_SIZE);
+                cell.getShape().draw();
                 cells.add(cell);
             }
         }
-
-        for (Cell cell : cells) {
-            cell.getShape().draw();
-        }
     }
 
-    public void paintCell() {
-        for (Cell cell : cells) {
-
-            if (cell.getCol()-getPadding() == mapEditor.getPainter().getCol() &&
-                cell.getRow()-getPadding() == mapEditor.getPainter().getRow()) {
-
-                cell.paint(grid.getColor());
-                cell.fill(true);
-            }
-        }
+    public ArrayList<Cell> getCells() {
+        return cells;
     }
-
-   public void eraseColor() {
-        for (Cell cell : cells) {
-
-            if (cell.getCol()-getPadding() == mapEditor.getPainter().getCol() &&
-                cell.getRow()-getPadding() == mapEditor.getPainter().getRow()) {
-
-                cell.getShape().draw();
-                cell.fill(false);
-            }
-        }
-   }
 }

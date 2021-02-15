@@ -8,7 +8,6 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 public class MapEditorKeyboardHandler implements KeyboardHandler {
 
     private MapEditor mapEditor;
-    private Painter painter;
     private Movement movement;
     private Paint paint;
 
@@ -16,7 +15,7 @@ public class MapEditorKeyboardHandler implements KeyboardHandler {
 
         this.mapEditor = mapEditor;
         movement = new Movement(painter);
-        paint = new Paint(mapEditor.getMapEditorGrid());
+        paint = new Paint(painter);
     }
 
     @Override
