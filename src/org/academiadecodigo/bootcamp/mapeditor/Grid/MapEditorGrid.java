@@ -72,4 +72,13 @@ public class MapEditorGrid implements Grid {
     public ArrayList<Cell> getCells() {
         return cells;
     }
+
+    public void clear() {
+
+        for (Cell cell : cells) {
+                cell.getShape().draw();
+                cell.fill(false);
+            }
+    }
+
 }

@@ -5,7 +5,6 @@ import org.academiadecodigo.bootcamp.mapeditor.Painter.Painter;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
-import java.io.IOException;
 
 public class MapEditorKeyboardHandler implements KeyboardHandler {
 
@@ -17,7 +16,7 @@ public class MapEditorKeyboardHandler implements KeyboardHandler {
 
         this.mapEditor = mapEditor;
         movement = new Movement(painter);
-        paint = new Paint(painter);
+        paint = new Paint(mapEditor.getMapEditorGrid(), painter);
     }
 
     @Override
@@ -29,6 +28,9 @@ public class MapEditorKeyboardHandler implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_E:
                 paint.erase();
+                break;
+            case KeyboardEvent.KEY_C:
+                paint.clearGrid();
                 break;
             case KeyboardEvent.KEY_UP:
                 movement.moveUp();

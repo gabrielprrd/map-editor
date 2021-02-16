@@ -17,27 +17,24 @@ public class FileSaver {
 
     private String convertGrid() {
 
-        // convert cell state to string in order to know where is filled
-        ArrayList<String> myArr = new ArrayList<>();
+        // convert cell state to string in order to store in a text file
+        ArrayList<String> stringsArray = new ArrayList<>();
 
         for (Cell cell : cells) {
 
             if (cell.isFilled()) {
-                myArr.add("1");
+                stringsArray.add("1");
             }
-            myArr.add("0");
+            stringsArray.add("0");
         }
 
-        return String.join("", myArr);
+        return String.join("", stringsArray);
     }
 
     public void save(String dst) {
 
         try {
-
-            this.in = new FileInputStream(convertGrid());
             this.out = new FileOutputStream(dst);
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -45,18 +42,20 @@ public class FileSaver {
         byte[] buffer = new byte[1024];
         int bytesRead = 0;
 
-        while (true) {
-            try {
+        try {
+            if ((bytesRead = in.read(buffer)) == -1) {
 
-                if ((bytesRead = in.read(buffer)) == -1) break;
-                    out.write(buffer, 0, bytesRead);
-                    in.close();
-                    out.close();
-                    System.out.println("trying to save file");
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                out.write(buffer, 0, bytesRead);
+                System.out.println("trying to save file");
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+        out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
