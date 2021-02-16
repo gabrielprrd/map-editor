@@ -13,6 +13,8 @@ public class Painter {
     private int col;
     private int row;
     private int cellSize;
+    private int x;
+    private int y;
 
     public Painter(MapEditorGrid grid, Color color, int col, int row, int size1, int size2) {
         this.grid = grid;
@@ -23,7 +25,7 @@ public class Painter {
     }
 
     public void init() {
-        cursor.setColor(Color.BLACK);
+        cursor.setColor(Color.GREEN);
         cursor.fill();
     }
 
@@ -43,27 +45,56 @@ public class Painter {
         return row;
     }
 
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setY(int col) {
+        y = col / cellSize;
+    }
+
+    public void setX(int row) {
+        x = row / cellSize;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
     public void updateRowToUp() {
         row -= cellSize;
+        //setX(row);
     }
 
     public void updateRowToDown() {
         row += cellSize;
+        //setX(row);
     }
 
     public void updateColToLeft() {
         col -= cellSize;
+        //setY(col);
     }
 
     public void updateColToRight() {
         col += cellSize;
+        //setY(col);
     }
 
     public void paint() {
         for (Cell cell : grid.getCells()) {
 
             if (cell.getCol() - grid.getPadding() == col &&
-                    cell.getRow() - grid.getPadding() == row) {
+                cell.getRow() - grid.getPadding() == row) {
 
                 cell.paint(color);
                 cell.fill(true);

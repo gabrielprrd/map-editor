@@ -3,11 +3,15 @@ package org.academiadecodigo.bootcamp.mapeditor;
 import org.academiadecodigo.bootcamp.mapeditor.Grid.MapEditorGrid;
 import org.academiadecodigo.bootcamp.mapeditor.IOHandler.FileSaver;
 import org.academiadecodigo.bootcamp.mapeditor.InputHandler.MapEditorKeyboardHandler;
+import org.academiadecodigo.bootcamp.mapeditor.InputHandler.MapEditorMouseHandler;
 import org.academiadecodigo.bootcamp.mapeditor.Painter.Painter;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.simplegraphics.mouse.Mouse;
+import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
+import org.academiadecodigo.simplegraphics.mouse.MouseEventType;
 
 
 public class MapEditor {
@@ -22,6 +26,11 @@ public class MapEditor {
     private Keyboard keyboard;
     private KeyboardEvent keyboardEvent;
     private KeyboardEventType keyboardEventType;
+
+    private MapEditorMouseHandler mapEditorMouseHandler;
+    private Mouse mouse;
+    private MouseEvent mouseEvent;
+    private MouseEventType mouseEventType;
 
     public MapEditor(int cols, int rows) {
         this.cols = cols;
@@ -52,6 +61,8 @@ public class MapEditor {
     }
 
     public void initInputHandlers() {
+
+        // keyboard
         mapEditorKeyboardHandler = new MapEditorKeyboardHandler(this, painter);
         keyboard = new Keyboard(mapEditorKeyboardHandler);
         keyboardEvent = new KeyboardEvent();
@@ -63,6 +74,13 @@ public class MapEditor {
         keyboard.addEventListener(KeyboardEvent.KEY_E, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_S, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_C, KeyboardEventType.KEY_PRESSED);
+
+        // mouse
+        mapEditorMouseHandler = new MapEditorMouseHandler(this, painter);
+        mouse = new Mouse(mapEditorMouseHandler);
+        mouseEvent = new MouseEvent(painter.getY(), painter.getX(), mouseEventType);
+        mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
+        mouse.addEventListener(MouseEventType.MOUSE_MOVED);
 
     }
 
