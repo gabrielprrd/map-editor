@@ -1,6 +1,7 @@
 package org.academiadecodigo.bootcamp.mapeditor;
 
 import org.academiadecodigo.bootcamp.mapeditor.Grid.MapEditorGrid;
+import org.academiadecodigo.bootcamp.mapeditor.IOHandler.FileLoader;
 import org.academiadecodigo.bootcamp.mapeditor.IOHandler.FileSaver;
 import org.academiadecodigo.bootcamp.mapeditor.InputHandler.MapEditorKeyboardHandler;
 import org.academiadecodigo.bootcamp.mapeditor.InputHandler.MapEditorMouseHandler;
@@ -21,6 +22,7 @@ public class MapEditor {
     MapEditorGrid mapEditorGrid;
     Painter painter;
     FileSaver fileSaver;
+    FileLoader fileLoader;
 
     private MapEditorKeyboardHandler mapEditorKeyboardHandler;
     private Keyboard keyboard;
@@ -43,8 +45,9 @@ public class MapEditor {
         mapEditorGrid = new MapEditorGrid(this, cols, rows);
         mapEditorGrid.init();
 
-        // instantiate file saver
-        fileSaver = new FileSaver(mapEditorGrid.getCells());
+        // instantiate file saver and loader
+        fileSaver = new FileSaver();
+        fileLoader = new FileLoader();
 
         // instantiate painter
         painter = new Painter(
@@ -73,6 +76,7 @@ public class MapEditor {
         keyboard.addEventListener(KeyboardEvent.KEY_SPACE, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_E, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_S, KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(KeyboardEvent.KEY_L, KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(KeyboardEvent.KEY_C, KeyboardEventType.KEY_PRESSED);
 
         // mouse
@@ -95,4 +99,9 @@ public class MapEditor {
     public FileSaver getFileSaver() {
         return fileSaver;
     }
+
+    public void load() {
+        mapEditorGrid.fileToGrid(fileLoader.load());
+    }
+
 }

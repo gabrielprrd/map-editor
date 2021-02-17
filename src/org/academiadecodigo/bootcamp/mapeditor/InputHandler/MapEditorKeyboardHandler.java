@@ -45,10 +45,10 @@ public class MapEditorKeyboardHandler implements KeyboardHandler {
                 movement.moveRight();
                 break;
             case KeyboardEvent.KEY_S:
-                mapEditor.getFileSaver().save("saved-drawing.txt");
+                mapEditor.getFileSaver().save(mapEditor.getMapEditorGrid().toString());
                 break;
             case KeyboardEvent.KEY_L:
-                // fileLoader.load(file.txt);
+                mapEditor.load();
                 break;
         }
     }

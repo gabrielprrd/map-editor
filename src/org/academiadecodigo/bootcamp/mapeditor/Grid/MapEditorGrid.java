@@ -2,18 +2,17 @@ package org.academiadecodigo.bootcamp.mapeditor.Grid;
 
 import org.academiadecodigo.bootcamp.mapeditor.Grid.Cell.Cell;
 import org.academiadecodigo.bootcamp.mapeditor.MapEditor;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-
-import java.util.ArrayList;
 
 public class MapEditorGrid implements Grid {
 
-    static final int CELL_SIZE = 10;
-    static final int PADDING = 10;
+    public static final int CELL_SIZE = 10;
+    public static final int PADDING = 10;
     private int cols;
     private int rows;
     private Rectangle grid;
-    private ArrayList<Cell> cells;
+    private Cell[][] cells;
     private MapEditor mapEditor;
 
     public MapEditorGrid(MapEditor mapEditor, int cols, int rows) {
@@ -27,7 +26,7 @@ public class MapEditorGrid implements Grid {
     @Override
     public void init() {
         grid.draw();
-        cells = new ArrayList<>();
+        cells = new Cell[rows][cols];
         generateCells();
     }
 
@@ -58,27 +57,63 @@ public class MapEditorGrid implements Grid {
     }
 
     public void generateCells() {
+        
 
-        for (int i=0; i<cols; i++) {
-            for (int j=0; j<rows; j++) {
-
-                Cell cell = new Cell(PADDING+(CELL_SIZE*i), PADDING+(CELL_SIZE*j), CELL_SIZE, CELL_SIZE);
-                cell.getShape().draw();
-                cells.add(cell);
+        for (int row=0; row<rows; row++) {
+            for (int col=0; col<cols; col++) {
+                cells[row][col] = new Cell(row, col);
+                cells[row][col].getShape().draw();
             }
         }
     }
 
-    public ArrayList<Cell> getCells() {
+    public Cell[][] getCells() {
         return cells;
     }
 
     public void clear() {
 
-        for (Cell cell : cells) {
-                cell.getShape().draw();
-                cell.fill(false);
+        for (int row = 0; row < rows; row ++) {
+            for (int col = 0; col < cols; col++) {
+                cells[row][col].erase();
             }
+        }
+
+    }
+
+    public void fileToGrid(String file) {
+
+        int index = 0;
+
+        for (int row=0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+
+                Cell cell = cells[row][col];
+                //if (file.charAt(index) == "0") {
+                if(true) {
+                    cell.erase();
+                } else {
+                    cell.paint(Color.BLACK);
+                }
+                index++;
+            }
+            index++;
+        }
+    }
+
+    @Override
+    public String toString() {
+
+        String formattedGrid = "";
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; cols++) {
+                formattedGrid += cells[row][col];
+            }
+                formattedGrid += "\n";
+        }
+
+        return formattedGrid;
     }
 
 }

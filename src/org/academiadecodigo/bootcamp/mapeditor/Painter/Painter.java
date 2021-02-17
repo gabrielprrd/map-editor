@@ -91,26 +91,27 @@ public class Painter {
     }
 
     public void paint() {
-        for (Cell cell : grid.getCells()) {
-
-            if (cell.getCol() - grid.getPadding() == col &&
+        for (int col = 0; col < getGrid().getCols(); col++) {
+            for(int row = 0; row <getGrid().getRows(); row++) {
+            /*if (cell.getCol() - grid.getPadding() == col &&
                 cell.getRow() - grid.getPadding() == row) {
 
                 cell.paint(color);
-                cell.fill(true);
+            }*/
             }
         }
     }
 
     public void eraseColor() {
-        for (Cell cell : grid.getCells()) {
+        /*for (Cell cell : grid.getCells()) {
 
             if (cell.getCol() - grid.getPadding() == col &&
                     cell.getRow() - grid.getPadding() == row) {
 
                 cell.getShape().draw();
+                cell.erase();
                 cell.fill(false);
             }
-        }
+        }*/
     }
 }

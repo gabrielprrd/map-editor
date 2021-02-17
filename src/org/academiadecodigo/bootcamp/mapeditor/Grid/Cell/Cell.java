@@ -3,6 +3,9 @@ package org.academiadecodigo.bootcamp.mapeditor.Grid.Cell;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
+import static org.academiadecodigo.bootcamp.mapeditor.Grid.MapEditorGrid.CELL_SIZE;
+import static org.academiadecodigo.bootcamp.mapeditor.Grid.MapEditorGrid.PADDING;
+
 public class Cell {
 
     private Rectangle rect;
@@ -10,11 +13,11 @@ public class Cell {
     private int col;
     private int row;
 
-    public Cell(int col, int row, int size, int size2) {
+    public Cell(int col, int row) {
         this.col = col;
         this.row = row;
 
-        rect = new Rectangle(col, row, size, size2);
+        rect = new Rectangle(col * CELL_SIZE + PADDING, row * CELL_SIZE + PADDING, CELL_SIZE, CELL_SIZE);
     }
 
     public Rectangle getShape() {
@@ -23,9 +26,16 @@ public class Cell {
 
     public void paint(Color color) {
 
+        filled = true;
         rect.setColor(color);
         rect.fill();
     }
+
+    public void erase() {
+        filled = false;
+        rect.draw();
+    }
+
 
     public void fill(boolean filled) {
 
@@ -43,5 +53,10 @@ public class Cell {
 
     public int getRow() {
         return row;
+    }
+
+    @Override
+    public String toString() {
+        return filled ? "1" : "0";
     }
 }
